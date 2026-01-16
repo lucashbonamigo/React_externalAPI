@@ -1,37 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import NavBar from './components/nav/NavBar'
-
-import axios from 'axios';
-
-axios.defaults.baseURL = 'https://api.themoviedb.org';
-axios.defaults.headers.common['Authorization'] = import.meta.env.VITE_TMDB_TOK;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-const instance = axios.create();
-
-const test = () => {
-    instance.get('/3/movie/popular?language=pt-BR', {
-        timeout: 5000
-    }).then(function (response) {
-        // manipula a resposta da requisição
-        console.log(response);
-    }).catch(function (error) {
-        console.log(error);
-    })
-};
+import useAxios from './hooks/useAxios'
+import Card from './components/card/Card';
 
 
 
 function App() {
-  test();
+  const { data, error, httpConfig } = useAxios();
   const [count, setCount] = useState(0)
+  const [dados, setDados] = useState<any>();
+
+  useEffect(() => {
+    httpConfig();
+    setDados(data[0]);
+  }, [])
+
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
 
-      {/* <Card/> */}
+      {console.log(dados)}
+      {data && data[0].data.results.map((element: any) => {
+
+        <Card image='aaaaaaaa' title='aaaaa' rate={9} />
+      })}
     </>
   )
 }
