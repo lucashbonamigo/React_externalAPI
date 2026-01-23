@@ -17,7 +17,7 @@ interface IMDBResponse {
 
 const useAxios = () => {
     const [type, setType] = useState<String>();
-    const [data, setData] = useState<any>();
+    const [data, setData] = useState();
     const [code, setCode] = useState<number>(0);
     const [error, setError] = useState<string>('');
     const [endPoint,setEndPoint] = useState<string>('/3/movie/popular?language=pt-BR')
@@ -31,9 +31,9 @@ const useAxios = () => {
             instance.get(endPoint, {
                 timeout: 5000
             }).then(function (response) {
-                console.log(response)
-                setData(response);
-                console.log(data)
+                console.log(response.data)
+                setData(response.data);
+                console.log(data);
             }).catch(function (error) {
                setError(error);
             })

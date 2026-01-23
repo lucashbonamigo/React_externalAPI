@@ -1,15 +1,15 @@
 
 interface ICardParms{
-    image: string,
-    title: string,
-    rate: number
+    image?: string,
+    title?: string,
+    rate?: number
 }
 
 
 export const Card = ({image, title, rate}: ICardParms) => {
     return (
         <>
-            <div className="bg-gray-800 w-100 h-150 p-3 rounded-xl" >
+            <div className="bg-gray-800 w-100 h-150 p-3 m-5 rounded-xl" >
                 <div className="bg-gray-900 grid w-full h-full rounded-xl place-content-between p-3">
                     <div className="w-full">
                         <img className="size-100" src={image} alt="" />
