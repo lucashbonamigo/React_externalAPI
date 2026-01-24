@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { MdOutlineStarRate } from "react-icons/md";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 interface ICardParms{
     image: string,
     title?: string,
-    rate?: number
+    rate?: number,
+    id: number
 }
 
 
-export const Card = ({image, title, rate}: ICardParms) => {
-    const [imageId, setImageId] = useState(image);
+export const Card = ({image, title, rate, id}: ICardParms) => {
+    const Navigate = useNavigate();
 
     return (
         <>
@@ -22,11 +24,13 @@ export const Card = ({image, title, rate}: ICardParms) => {
 
                     <div className="w-full size-35 flex-col place-content-end">
                         <h2 className="py-3 text-white font-bold text-nowrap">{title}</h2>
-                        <h6 className="py-3 flex align-middle text-white"><MdOutlineStarRate />{" "+rate}</h6>
+                        <h6 className="py-3 flex align-middle text-white"><MdOutlineStarRate className="text-yellow-500"/>{" "+rate}</h6>
                         <input 
                             type="button" 
                             className="cursor-pointer py-3 bg-yellow-500 bg-yellow-500 w-full p-3 rounded-xs hover:bg-yellow-700" 
-                            value="Details"/>
+                            value="Details"
+                            onClick={()=> Navigate('/movie/'+id)}
+                        />
                     </div>
                 </div>
             </div>

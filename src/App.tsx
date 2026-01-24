@@ -6,14 +6,10 @@ import Card from './components/card/Card';
 
 function App() {
   const { data, error, httpConfig } = useAxios();
-  const [dados, setDados] = useState<any>();
-
-  var image;
 
   useEffect(() => {
     httpConfig();
   }, [])
-
 
   return (
     <>
@@ -26,6 +22,7 @@ function App() {
             image={'https://image.tmdb.org/t/p/w500'+element.poster_path} 
             title={element.title} 
             key={element.id} 
+            id={element.id}
           />
         )) : <p>non existe</p>}
       </div>
