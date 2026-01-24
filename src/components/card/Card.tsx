@@ -48,7 +48,7 @@ export const Card = ({ image, title, rate, id }: ICardParms) => {
             navigate(`/movie/${id}`);
           }}
           className="mt-2 w-full py-2 rounded-lg bg-yellow-500 text-black font-semibold 
-                     hover:bg-yellow-400 transition"
+                     hover:bg-yellow-400 transition cursor-pointer"
         >
           Ver detalhes
         </button>
