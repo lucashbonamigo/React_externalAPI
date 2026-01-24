@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import NavBar from './components/nav/NavBar'
 import useAxios from './hooks/useAxios'
 import Card from './components/card/Card';
 
@@ -8,12 +7,11 @@ function App() {
   const { data, error, httpConfig } = useAxios();
 
   useEffect(() => {
-    httpConfig();
+    httpConfig('GET', '/3/movie/popular?language=pt-BR');
   }, [])
 
   return (
     <>
-      <NavBar />
       <div className='flex flex-wrap justify-center h-full  w-full bg-gray-600'>
         {data ? data.results.map((element) => (
           

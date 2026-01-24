@@ -1,41 +1,60 @@
-import { useEffect, useState } from "react";
-import useAxios from "../../hooks/useAxios";
 import { MdOutlineStarRate } from "react-icons/md";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-interface ICardParms{
-    image: string,
-    title?: string,
-    rate?: number,
-    id: number
+interface ICardParms {
+  image: string;
+  title?: string;
+  rate?: number;
+  id: number;
 }
 
+export const Card = ({ image, title, rate, id }: ICardParms) => {
+  const navigate = useNavigate();
 
-export const Card = ({image, title, rate, id}: ICardParms) => {
-    const Navigate = useNavigate();
+  return (
+    <div
+      onClick={() => navigate(`/movie/${id}`)}
+      className="group cursor-pointer w-64 bg-gray-800 rounded-2xl p-4 shadow-lg 
+                 hover:scale-105 hover:shadow-indigo-500/20 transition-all duration-300 m-2"
+    >
+      <div className="relative overflow-hidden rounded-xl">
+        <img
+          src={image}
+          alt={title || "Movie poster"}
+          className="w-full h-80 object-cover group-hover:scale-110 transition duration-300"
+        />
 
-    return (
-        <>
-            <div className="bg-gray-800 w-100 h-150 p-3 m-5 rounded-xl" >
-                <div className="bg-gray-900 grid w-full h-full rounded-xl place-content-between p-3">
-                    <div className="w-full">
-                        <img className="size-100" src={image} alt="banner of movie" />
-                    </div>
+        {rate && (
+          <div className="absolute top-2 right-2 bg-black/70 px-2 py-1 rounded-lg flex items-center gap-1 text-sm">
+            <MdOutlineStarRate className="text-yellow-400" />
+            <span className="text-white font-semibold">
+              {rate.toFixed(1)}
+            </span>
+          </div>
+        )}
+      </div>
 
-                    <div className="w-full size-35 flex-col place-content-end">
-                        <h2 className="py-3 text-white font-bold text-nowrap">{title}</h2>
-                        <h6 className="py-3 flex align-middle text-white"><MdOutlineStarRate className="text-yellow-500"/>{" "+rate}</h6>
-                        <input 
-                            type="button" 
-                            className="cursor-pointer py-3 bg-yellow-500 bg-yellow-500 w-full p-3 rounded-xs hover:bg-yellow-700" 
-                            value="Details"
-                            onClick={()=> Navigate('/movie/'+id)}
-                        />
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+      <div className="mt-4 flex flex-col gap-2">
+        <h2
+          className="text-white font-semibold text-sm line-clamp-2"
+          title={title}
+        >
+          {title || "Título indisponível"}
+        </h2>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/movie/${id}`);
+          }}
+          className="mt-2 w-full py-2 rounded-lg bg-yellow-500 text-black font-semibold 
+                     hover:bg-yellow-400 transition"
+        >
+          Ver detalhes
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Card;

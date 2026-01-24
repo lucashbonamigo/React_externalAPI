@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../../public/logo.jpg"
 
 export const NavBar = () => {
+    // const Navigate = useNavigate();
     return (
         <React.Fragment>
             <nav className="flex w-full h-17 bg-black  p-3">

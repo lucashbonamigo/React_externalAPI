@@ -9,7 +9,7 @@ const instance = axios.create();
 interface parms {
     method: string,
     movie: string,
-    endPointURL?: string
+    endPointURL: string
 }
 
 interface IMDBResponse {
@@ -21,26 +21,25 @@ const useAxios = () => {
     const [data, setData] = useState();
     const [code, setCode] = useState<number>(0);
     const [error, setError] = useState<string>('');
-    const [endPoint, setEndPoint] = useState<string>('/3/movie/popular?language=pt-BR')
 
 
-    const httpConfig = (method?: string, endPointURL?: string) => {
-        if (endPointURL) setEndPoint(endPointURL);
+    const httpConfig = (method: string, endPointURL: string) => {
         if (method) setType(method);
 
-        if (type == method) {
-            instance.get(endPoint, {
+        // if (type == 'GET') {
+            console.log(endPointURL)
+            instance.get(endPointURL, {
                 timeout: 5000
             }).then(function (response) {
-                console.log(response.data)
+                console.log(response)
                 setData(response.data);
             }).catch(function (error) {
                 setError(error);
             })
-        }
+        // }
     }
 
-    return { data, code, httpConfig, error };
+    return { data, code, httpConfig, error};
 };
 
 export default useAxios;
