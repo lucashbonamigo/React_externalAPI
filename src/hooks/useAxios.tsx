@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import type { ITMDBPopularResponse } from '../Interface/ITMDBPopularResponse';
+import type { ITMDBMovieResponse } from '../Interface/ITMDBMovieResponse';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org';
 axios.defaults.headers.common['Authorization'] = import.meta.env.VITE_TMDB_TOKEN;
@@ -12,13 +14,10 @@ interface parms {
     endPointURL: string
 }
 
-interface IMDBResponse {
 
-}
-
-const useAxios = () => {
+const useAxios = <T,>() => {
     const [type, setType] = useState<String>();
-    const [data, setData] = useState();
+    const [data, setData] = useState<T>();
     const [code, setCode] = useState<number>(0);
     const [error, setError] = useState<string>('');
 

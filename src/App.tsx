@@ -3,18 +3,18 @@ import './App.css'
 import useAxios from './hooks/useAxios'
 import Card from './components/card/Card';
 import Pagination from './components/pagination/pagination';
+import type { ITMDBPopularResponse } from './Interface/ITMDBPopularResponse';
 
 function App() {
-  const { data, error, httpConfig } = useAxios();
+  const { data, error, httpConfig } = useAxios<ITMDBPopularResponse>();
   const [page, setPage] = useState<Number>(1);
 
   useEffect(() => {
-    httpConfig('GET', '/3/movie/popular?page=2?language=pt-BR?');
-  }, [])
+    httpConfig('GET', `/3/movie/popular?page=${page}?language=pt-BR?`);
+  }, [page])
 
   return (
     <div className='bg-gray-600'>
-      <Pagination data={data} />
       <div className='flex flex-wrap justify-center h-full  w-full'>
         {data ? data.results.map((element) => (
 
@@ -27,7 +27,7 @@ function App() {
           />
         )) : <p>non existe</p>}
       </div>
-      <Pagination data={data} />
+      <Pagination currentPage={data && data.page} setPage={setPage} />
     </div>
   )
 }

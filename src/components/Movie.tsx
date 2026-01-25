@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { useEffect } from "react";
+import type { ITMDBMovieResponse } from "../Interface/ITMDBMovieResponse";
 
 export const Movie = () => {
   const { id } = useParams();
-  const { httpConfig, data } = useAxios();
+  const { httpConfig, data } = useAxios<ITMDBMovieResponse>();
 
   useEffect(() => {
     httpConfig("GET", "/3/movie/" + id + "?language=pt-BR");
