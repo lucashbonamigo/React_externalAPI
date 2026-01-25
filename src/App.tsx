@@ -4,20 +4,29 @@ import useAxios from './hooks/useAxios'
 import Card from './components/card/Card';
 import Pagination from './components/pagination/pagination';
 import type { ITMDBPopularResponse } from './Interface/ITMDBPopularResponse';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMoviesList } from './redux/actions';
 
 function App() {
-  const { data, error, httpConfig } = useAxios<ITMDBPopularResponse>();
+  const { data: apiResult, error, httpConfig } = useAxios<ITMDBPopularResponse>();
   const [page, setPage] = useState<Number>(1);
+  const reduxData = useSelector((state: any) => state.movies.list);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    httpConfig('GET', `/3/movie/popular?page=${page}?language=pt-BR?`);
-  }, [page])
+    httpConfig('GET', `/3/movie/popular?language=pt-BR&page=${page}`);
+  }, [page]);
+
+  useEffect(() => {
+    if (apiResult) {
+      dispatch(setMoviesList(apiResult));
+    }
+  }, [apiResult, dispatch]);
 
   return (
     <div className='bg-gray-600'>
       <div className='flex flex-wrap justify-center h-full  w-full'>
-        {data ? data.results.map((element) => (
-
+        {reduxData && reduxData.results && reduxData ? reduxData.results.map((element:any) => (
           <Card
             rate={element.vote_average}
             image={'https://image.tmdb.org/t/p/w500' + element.poster_path}
@@ -25,9 +34,9 @@ function App() {
             key={element.id}
             id={element.id}
           />
-        )) : <p>non existe</p>}
+        )) : <p className="text-white h-10 p-10">Carregando ou nenhum filme encontrado...</p>}
       </div>
-      <Pagination currentPage={data && data.page} setPage={setPage} />
+      <Pagination currentPage={reduxData?.page || 1} setPage={setPage} />
     </div>
   )
 }
