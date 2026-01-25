@@ -1,0 +1,19 @@
+#limpar {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-weight: bold;
+}
+
+#campoTexto {
+  padding-right: 25px;
+  padding: 8px;
+  width: 200px;
+}
+
+.input-container {
+  position: relative;
+}
