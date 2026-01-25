@@ -8,7 +8,7 @@ export const Movie = () => {
   const { httpConfig, data } = useAxios<ITMDBMovieResponse>();
 
   useEffect(() => {
-    httpConfig("GET", "/3/movie/" + id + "?language=pt-BR");
+    httpConfig("/3/movie/" + id + "?language=pt-BR");
   }, []);
 
   if (!data) {
@@ -97,10 +97,6 @@ export const Movie = () => {
                 <span>{data.popularity.toFixed(1)}</span>
               </div>
 
-              <div>
-                <span className="block text-gray-400">País</span>
-                <span>{data.origin_country.join(", ")}</span>
-              </div>
             </div>
 
             <ul className="flex flex-wrap gap-2 mt-6">

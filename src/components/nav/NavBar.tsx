@@ -11,7 +11,7 @@ export const NavBar = () => {
     const { httpConfig, data, loading } = useAxios<any>();
 
     const searchMovie = () => {
-        httpConfig('GET', `/3/search/movie?query=${find}&language=pt-BR`);
+        httpConfig(`/3/search/movie?query=${find}&language=pt-BR`);
     };
 
     useEffect(() => {

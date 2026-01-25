@@ -8,16 +8,13 @@ const instance = axios.create();
 
 
 const useAxios = <T,>() => {
-    const [type, setType] = useState<String>();
     const [data, setData] = useState<T>();
-    const [code, setCode] = useState<number>(0);
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>();
 
 
-    const httpConfig = (method: string, endPointURL: string) => {
+    const httpConfig = (endPointURL: string) => {
         setLoading(true)
-        if (method) setType(method);
 
         // if (type == 'GET') {
         console.log(endPointURL)
@@ -33,7 +30,7 @@ const useAxios = <T,>() => {
         setLoading(false);
     }
 
-    return { data, code, httpConfig, error, loading };
+    return { data, httpConfig, error, loading };
 };
 
 export default useAxios;

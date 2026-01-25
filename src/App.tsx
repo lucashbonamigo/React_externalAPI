@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setMoviesList } from './redux/actions';
 
 function App() {
-  const { data: apiResult, error, httpConfig } = useAxios<ITMDBPopularResponse>();
+  const { data: apiResult, httpConfig } = useAxios<ITMDBPopularResponse>();
   const [page, setPage] = useState<Number>(1);
   const reduxData = useSelector((state: any) => state.movies.list);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    httpConfig('GET', `/3/movie/popular?language=pt-BR&page=${page}`);
+    httpConfig(`/3/movie/popular?language=pt-BR&page=${page}`);
   }, [page]);
 
   useEffect(() => {
