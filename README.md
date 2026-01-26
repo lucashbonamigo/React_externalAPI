@@ -152,7 +152,7 @@ Cada página representa uma **visualização completa** da aplicação (ex.: pá
 ✅ Consumo de API externalizado em serviços específicos com **Axios**.
 
 
-##📄 Licença
+## 📄 Licença
 
 **Este projeto está sob a licença MIT.**
 
