@@ -32,8 +32,7 @@ O projeto consome a API do **The Movie Database (TMDB)** para exibir uma lista d
 
 ## 🚀 Demonstração
 
-🔗 [Acesse a aplicação](#)  
-*(adicione aqui o link do GitHub Pages)*
+🔗 [Acesse a aplicação](https://lucashbonamigo.github.io/React_externalAPI/)
 
 ---
 
